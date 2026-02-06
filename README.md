@@ -4,11 +4,10 @@ This guide will help you create and manage multiple isolated environments (dev, 
 
 ## Prerequisites
 Required Tools
-
- OCI CLI installed and configured
- Terraform >= 1.0
- Git
- SSH key pair generated
++ OCI CLI installed and configured
++ Terraform >= 1.0
++ Git
++ SSH key pair generated
 
 OCI Setup
 ```
