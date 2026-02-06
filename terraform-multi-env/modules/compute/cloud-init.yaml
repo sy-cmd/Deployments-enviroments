@@ -1,0 +1,16 @@
+#cloud-config
+package_update: true
+package_upgrade: true
+
+packages:
+  - git
+  - curl
+  - wget
+  - vim
+  - htop
+
+runcmd:
+  - echo "Environment: ${environment}" > /etc/environment-info
+  - systemctl restart sshd
+
+final_message: "Instance ${environment} is ready!"
