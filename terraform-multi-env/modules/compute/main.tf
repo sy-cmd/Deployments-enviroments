@@ -5,6 +5,11 @@ resource "oci_core_instance" "main" {
   display_name        = "${var.environment}-instance-${count.index + 1}"
   shape               = var.instance_shape
 
+  shape_config {
+  ocpus         = var.shape_ocpus
+  memory_in_gbs = var.shape_memory
+  } 
+
   create_vnic_details {
     subnet_id        = var.subnet_id
     display_name     = "${var.environment}-vnic-${count.index + 1}"

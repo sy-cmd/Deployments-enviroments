@@ -1,19 +1,19 @@
 terraform {
   required_providers {
     oci = {
-      source  = "oracle/oci"
-      version = "~> 5.0"
+      source  = "oracle/oci"  # This MUST match the root module exactly
+      version = ">= 5.0"
     }
   }
 }
 
-variable "environment" {
-  description = "Environment name"
+variable "region" {
+  description = "OCI region"
   type        = string
 }
 
 variable "compartment_id" {
-  description = "OCI Compartment ID"
+  description = "Compartment OCID"
   type        = string
 }
 
@@ -22,21 +22,10 @@ variable "availability_domain" {
   type        = string
 }
 
-variable "subnet_id" {
-  description = "Subnet ID for instance"
-  type        = string
-}
-
 variable "instance_shape" {
   description = "Instance shape"
   type        = string
   default     = "VM.Standard.E2.1.Micro"
-}
-
-variable "instance_count" {
-  description = "Number of instances"
-  type        = number
-  default     = 1
 }
 
 variable "image_id" {
@@ -47,12 +36,6 @@ variable "image_id" {
 variable "ssh_public_key" {
   description = "SSH public key"
   type        = string
-}
-
-variable "assign_public_ip" {
-  description = "Assign public IP"
-  type        = bool
-  default     = true
 }
 
 variable "shape_ocpus" {

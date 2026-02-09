@@ -1,3 +1,12 @@
+terraform {
+  required_providers {
+    oci = {
+      source  = "oracle/oci"
+      version = "~> 5.0"
+    }
+  }
+}
+
 variable "environment" {
   description = "Environment name (dev, staging, production)"
   type        = string
