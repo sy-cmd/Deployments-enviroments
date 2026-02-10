@@ -7,7 +7,7 @@ provider "oci" {
 module "network" {
   source = "../../modules/network"
 
-  # Add this line to pass the authenticated provider
+  #  line to pass the authenticated provider
   providers = {
     oci = oci
   }
@@ -21,7 +21,7 @@ module "network" {
 module "compute" {
   source = "../../modules/compute"
 
-  # THIS IS THE MISSING KEY
+  # line to pass the authenticated provider
   providers = {
     oci = oci
   }
