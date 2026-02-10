@@ -25,15 +25,15 @@ terraform-multi-env/
 │   ├── dev/
 │   │   ├── main.tf
 │   │   ├── terraform.tfvars
-│   │   └── backend.tf
+│   │   └── variables.tf
 │   ├── staging/
 │   │   ├── main.tf
 │   │   ├── terraform.tfvars
-│   │   └── backend.tf
+│   │   └── variables.tf
 │   └── production/
 │       ├── main.tf
 │       ├── terraform.tfvars
-│       └── backend.tf
+│       └── variables.tf
 ├── modules/
 │   ├── compute/
 │   │   ├── main.tf
@@ -52,4 +52,47 @@ terraform-multi-env/
 │   ├── destroy-pr-env.sh
 │   └── validate-env.sh
 └── README.md
+```
+### Workspace Management
+Deploy Each Environment
++ Deploy Development:
+```
+cd ~/terraform-multi-env/environments/dev
+oci session authenticate --region af-johannesburg-1 --profile sydney
+terraform init
+terraform plan
+terraform apply
+
+```
++ Deploy Staging
+```
+cd ~/terraform-multi-env/environments/staging
+terraform init
+terraform plan
+terraform apply
+```
++ Deploy Production:
+```
+cd ~/terraform-multi-env/environments/production
+terraform init
+terraform plan
+terraform apply
+```
+
+### Create PR Environment with scripts 
+where `42` is the attribute given by the user when running the scripts 
+```
+cd ~/terraform-multi-env
+./scripts/create-pr-env.sh 42
+
+
+# Review the plan the environment created 
+cd environments/pr-42
+terraform apply tfplan
+```
+
+#### Destroy PR Environment
+```
+cd ~/terraform-multi-env
+./scripts/destroy-pr-env.sh 42
 ```
