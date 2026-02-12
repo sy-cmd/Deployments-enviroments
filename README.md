@@ -1,8 +1,10 @@
 # Deployments-enviroments
-Oracle Cloud Infrastructure with Terraform 
-This guide will help you create and manage multiple isolated environments (dev, staging, production) on OCI using Terraform.
+Oracle Cloud Infrastructure with Terraform
+Production-ready Oracle Cloud Infrastructure with complete monitoring, automated backups, and secure multi-environment deployment using Terraform.
 
-## Features 
+Deploy scalable, monitored infrastructure across dev, staging, and production environments with Terraform best practices.
+
+## Features
 + Complete isolation - Each environment has separate VCNs, subnets, and state files
 + Automated PR environments - Create/destroy review environments with one command
 + Production security - Private subnets + bastion host for production
@@ -19,14 +21,14 @@ Required Tools
 
 OCI Setup
 ```
-# Verify OCI authentication 
+# Verify OCI authentication
 oci session authenticate --region af-johannesburg-1 --profile DEFAULT
 
 # Verify Terraform is installed
 terraform --version
 ```
 
-## Structure 
+## Structure
 ```
 terraform-multi-env/
 ├── environments/
@@ -51,14 +53,18 @@ terraform-multi-env/
 │   │   ├── main.tf
 │   │   ├── variables.tf
 │   │   └── outputs.tf
-│   └── security/
+│   ├── monitoring/
+│   │   ├── main.tf
+│   │   ├── variables.tf
+│   │   └── outputs.tf
+│   └── loadbalancer/
 │       ├── main.tf
 │       ├── variables.tf
 │       └── outputs.tf
 ├── scripts/
 │   ├── create-pr-env.sh
 │   ├── destroy-pr-env.sh
-│   └── validate-env.sh
+│   └── backup-all.sh
 └── README.md
 ```
 ### Workspace Management
@@ -87,14 +93,14 @@ terraform plan
 terraform apply
 ```
 
-### Create PR Environment with scripts 
-where `42` is the attribute given by the user when running the scripts 
+### Create PR Environment with scripts
+where `42` is the attribute given by the user when running the scripts
 ```
 cd ~/terraform-multi-env
 ./scripts/create-pr-env.sh 42
 
 
-# Review the plan the environment created 
+# Review the plan the environment created
 cd environments/pr-42
 terraform apply tfplan
 ```
