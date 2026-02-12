@@ -2,6 +2,14 @@
 Oracle Cloud Infrastructure with Terraform 
 This guide will help you create and manage multiple isolated environments (dev, staging, production) on OCI using Terraform.
 
+## Features 
++ Complete isolation - Each environment has separate VCNs, subnets, and state files
++ Automated PR environments - Create/destroy review environments with one command
++ Production security - Private subnets + bastion host for production
++ Cost tracking - Resource tagging by environment
++ Scalable - Modular design for easy expansion
+
+
 ## Prerequisites
 Required Tools
 + OCI CLI installed and configured

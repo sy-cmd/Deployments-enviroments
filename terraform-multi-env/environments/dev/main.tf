@@ -7,7 +7,7 @@ provider "oci" {
 module "network" {
   source = "../../modules/network"
 
-  #  line to pass the authenticated provider
+  #line to pass the authenticated provider
   providers = {
     oci = oci
   }
@@ -21,7 +21,7 @@ module "network" {
 module "compute" {
   source = "../../modules/compute"
 
-  # line to pass the authenticated provider
+   #line to pass the authenticated provider
   providers = {
     oci = oci
   }
@@ -38,6 +38,37 @@ module "compute" {
   #VM.Standard.A1.Flex
   shape_ocpus         = var.shape_ocpus
   shape_memory        = var.shape_memory
+}
+# Load Balancer module
+module "loadbalancer" {
+  source = "../../modules/loadbalancer"
+   #line to pass the authenticated provider
+  providers = {
+    oci = oci
+  }
+  environment    = "dev"
+  compartment_id = var.compartment_id
+  subnet_ids     = [module.network.public_subnet_id]
+  backend_ips    = module.compute.private_ips
+}
+
+# Monitoring module
+module "monitoring" {
+  source = "../../modules/monitoring"
+
+  environment    = "dev"
+  compartment_id = var.compartment_id
+  instance_ids   = module.compute.instance_ids
+  alert_email    = "yourEmail" 
+}
+
+# object storage module
+module "backup_storage" {
+  source = "../../modules/objectstorage"
+
+  environment    = "dev"
+  compartment_id = var.compartment_id
+  bucket_name    = "backups"
 }
 
 output "dev_public_ips" {
